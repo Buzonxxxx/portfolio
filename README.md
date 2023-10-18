@@ -1,4 +1,4 @@
-#Flask Server Development and Deployment
+# Flask Server Development and Deployment
 
 #### Flask Server
 1. Create virtual env
