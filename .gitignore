@@ -1,4 +1,11 @@
 venv
+.venv
 .DS_Store
 pw
+pw/
+*.pyc
+__pycache__/
+database.csv
 unfold-master.zip
+.env
+*.pem
