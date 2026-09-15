@@ -1,43 +1,35 @@
-# Flask Server Development and Deployment
+# Louis Liao — Portfolio
 
-#### Flask Server
-1. Create virtual env
-`python3 -m venv venv`
-2. Activate venv
-`. venv/bin/activate`
-3. Install Flask
-`pip3 install Flask`
-4. Launch the web server in the localhost
-`flask --app server run --debug`
+Simple Flask portfolio site (Colorlib Unfold template).
 
-#### Deployment
-1. Export packages info
-`pip3 freeze > requirements.txt`
-2. Register and go to Dashboard on https://www.pythonanywhere.com/
-3. Create a web project
-4. Go to bash and git clone your Flask project
-5. Setup virtual env
-`mkvirtualenv --python=/usr/bin/python3.9 my-virtualenv`
-6. Install Flask
-`pip install flask`
-7. Go to the project directory and install packages
-`pip install -r requirements.txt`
- - pip install flask
-8. Go to the web tab and set the virtualenv path
-9. Reload the path and open it
+## Local run
 
-#### Reference
-- Website Template
-  - https://themewagon.com/
-  - https://html5up.net/
-- Doc
-    - https://docs.python.org/3/library/venv.html
-    - https://flask.palletsprojects.com/en/3.0.x/
-    - https://github.com/Buzonxxxx/portfolio
-    - https://www.pythonanywhere.com/
-    - https://help.pythonanywhere.com/pages/Flask/
-- Sample
-    - http://buzonxxxx.pythonanywhere.com/
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+flask --app server run --debug
+```
 
-- Source
-    - https://themewagon.com/themes/free-bootstrap-4-html5-responsive-portfolio-website-template-unfold/
+Open http://127.0.0.1:5000/
+
+Production-style locally:
+
+```bash
+gunicorn server:app
+```
+
+## Deploy (Zeabur)
+
+- App entry: `gunicorn server:app` (see `Procfile`)
+- Install deps from `requirements.txt`
+- Live: https://louisliao.zeabur.app/
+
+## Notes
+
+- Contact form UI is hidden; `/submit_contact_form` returns 410 and does not store or email submissions.
+- Do not commit secrets (`pw/`, `.env`, credentials).
+
+## Template source
+
+- https://themewagon.com/themes/free-bootstrap-4-html5-responsive-portfolio-website-template-unfold/

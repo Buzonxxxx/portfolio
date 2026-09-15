@@ -343,30 +343,37 @@ var scrollWindow = function() {
 
 
 var counter = function() {
-	
-	$('.section-counter').waypoint( function( direction ) {
 
-		if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
-
-			var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
-			$(this.element).find('.number-counter').each(function(){
-				var $this = $(this),
-					num = $this.data('number');
-				$this.animateNumber(
-				  {
-				    number: num,
-				    numberStep: comma_separator_number_step
-				  }, 
-				  {
-				  	easing: 'swing',
-    				duration: 3000
-				  }
-				);
-			});
-			
+	var run = function($section) {
+		if ($section.hasClass('ftco-animated')) {
+			return;
 		}
+		$section.addClass('ftco-animated');
+		var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',');
+		$section.find('.number-counter').each(function(){
+			var $this = $(this),
+				num = $this.data('number');
+			// Restart animation from 0 using existing data-number attributes.
+			$this.text('0');
+			$this.animateNumber(
+			  {
+			    number: num,
+			    numberStep: comma_separator_number_step
+			  },
+			  {
+			  	easing: 'swing',
+    				duration: 3000
+			  }
+			);
+		});
+	};
 
-	} , { offset: '95%' } );
+	$('.section-counter').each(function(){
+		var $section = $(this);
+		$section.waypoint(function(){
+			run($section);
+		}, { offset: '85%' });
+	});
 
 };
 
